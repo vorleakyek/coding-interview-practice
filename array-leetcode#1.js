@@ -90,4 +90,70 @@ var removeDuplicates = function(nums) {
     return writeIndex; // Length of the array with no more than 2 duplicates
 };
 
+
+// 169. Majority Element
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+    const length = nums.length; 
+    const count = Math.floor(length / 2);
+
+    const hashTable = {};
+
+    for (let i = 0; i < length; i++) {
+        if(hashTable[nums[i]]) {
+            hashTable[nums[i]]++
+        } else {
+            hashTable[nums[i]] = 1 
+        }
+    }
     
+    console.log(hashTable)
+
+    let maxVal = 0; 
+    let returnVal = null;
+
+    for (let key in hashTable) {
+        if (hashTable[key] > count && hashTable[key] > maxVal) {
+            maxVal = hashTable[key];
+            returnVal = key;
+        } 
+    }
+
+    return returnVal;
+
+};
+
+//55. Jump Game
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function(nums) {
+
+    const n = nums.length;
+    let maxReach = 0;
+
+    if (n === 1) return true;
+
+    for (let i = 0; i < n -1; i++) {
+        if (i > maxReach) {
+            return false;
+        } 
+
+        maxReach = Math.max(maxReach, i + nums[i]);
+
+        if (maxReach >= n-1) {
+            return true
+        }
+    }
+
+    return false;
+
+};
+
+
+
